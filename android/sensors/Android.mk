@@ -19,22 +19,32 @@ LOCAL_PATH := $(call my-dir)
 # hw/<SENSORS_HARDWARE_MODULE_ID>.<ro.hardware>.so
 include $(CLEAR_VARS)
 
+LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
-LOCAL_SRC_FILES := sensors_qemu.c
-ifeq ($(TARGET_PRODUCT),vbox_x86)
-LOCAL_MODULE := sensors.vbox_x86
-else
-LOCAL_MODULE := sensors.goldfish
-endif
-include $(BUILD_SHARED_LIBRARY)
-
-
-include $(CLEAR_VARS)
-
-LOCAL_MODULE_RELATIVE_PATH := hw
-LOCAL_SHARED_LIBRARIES := liblog libcutils
+LOCAL_HEADER_LIBRARIES := libhardware_headers
+LOCAL_C_INCLUDES += device/generic/goldfish/include
 LOCAL_SRC_FILES := sensors_qemu.c
 LOCAL_MODULE := sensors.ranchu
 
 include $(BUILD_SHARED_LIBRARY)
+
+# LOCAL_MODULE_RELATIVE_PATH := hw
+# LOCAL_SHARED_LIBRARIES := liblog libcutils
+# LOCAL_SRC_FILES := sensors_qemu.c
+# ifeq ($(TARGET_PRODUCT),vbox_x86)
+# LOCAL_MODULE := sensors.vbox_x86
+# else
+# LOCAL_MODULE := sensors.goldfish
+# endif
+# include $(BUILD_SHARED_LIBRARY)
+
+
+# include $(CLEAR_VARS)
+
+# LOCAL_MODULE_RELATIVE_PATH := hw
+# LOCAL_SHARED_LIBRARIES := liblog libcutils
+# LOCAL_SRC_FILES := sensors_qemu.c
+# LOCAL_MODULE := sensors.ranchu
+
+# include $(BUILD_SHARED_LIBRARY)
